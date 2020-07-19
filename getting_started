@@ -1,0 +1,27 @@
+##
+#Splunk getting started
+#
+
+First do not install as root. 
+
+As root now navigate to /opt/splunk/bin issue the following command
+Start splunk
+- ./splunk start
+This will bring up the EULA that you will need to agree to
+Then you will be prompted for a UN and PW
+
+You will now go to localhost:8000
+
+- ./splink stop
+
+$ vi ~/.bashrc
+ export SPLUNK_HOME="/opt/splunkforwarder"
+ export PATH=$PATH:$SPLUNK_HOME/bin 
+$ exec bash
+
+Go to /opt/slunkforwarder/bin and do the following 
+
+./splunk start —accept-license
+./splunk start
+./splunk enable boot-start 
+./splunk status
