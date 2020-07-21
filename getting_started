@@ -2,17 +2,7 @@
 #Splunk getting started
 #
 
-First do not install as root. 
-
-As root now navigate to /opt/splunk/bin issue the following command
-Start splunk
-- ./splunk start
-This will bring up the EULA that you will need to agree to
-Then you will be prompted for a UN and PW
-
-You will now go to localhost:8000
-
-- ./splink stop
+First do not install as root
 
 $ vi ~/.bashrc
  export SPLUNK_HOME="/opt/splunkforwarder"
@@ -25,3 +15,24 @@ Go to /opt/slunkforwarder/bin and do the following
 ./splunk start
 ./splunk enable boot-start 
 ./splunk status
+
+
+For the host that has Splunk installed on it 
+
+Add the ports and then restart Splunk
+firewall-cmd --add-port=8000/tcp --add-port=8089/tcp --add-port=8191/tcp --add-port=8065/tcp --add-port=9997/tcp
+success
+
+./splunk restart - this is on the system that has splunk monitoring
+
+List the setup forwarders
+./splunk list forward-server
+
+Now tell the forwarder what to send for monitoring
+./splunk add monitor /var/log/messages
+
+Now restart splunk
+./splunk restart
+
+**I turned off the firewall, but will test with opening the ports when I have time
+
