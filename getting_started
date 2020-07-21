@@ -2,37 +2,41 @@
 #Splunk getting started
 #
 
-First do not install as root
+## First do not install as root
 
+## Adding splunk to your environment var to you do not have to go to /opt/splunk/bin to run splunk commands
 $ vi ~/.bashrc
  export SPLUNK_HOME="/opt/splunkforwarder"
  export PATH=$PATH:$SPLUNK_HOME/bin 
 $ exec bash
 
-Go to /opt/slunkforwarder/bin and do the following 
+## For the system that has Splunk installed on it, not the host that has a forwarder
+
+# Go to /opt/slunkforwarder/bin and do the following, if splunk is not in your env
 
 ./splunk start —accept-license
 ./splunk start
 ./splunk enable boot-start 
-./splunk status
+./splunk status 
 
-
-For the host that has Splunk installed on it 
-
-Add the ports and then restart Splunk
-firewall-cmd --add-port=8000/tcp --add-port=8089/tcp --add-port=8191/tcp --add-port=8065/tcp --add-port=9997/tcp
+# Add the ports and then restart Splunk
+- firewall-cmd --add-port=8000/tcp --add-port=8089/tcp --add-port=8191/tcp --add-port=8065/tcp --add-port=9997/tcp
 success
 
+**I turned off the firewall, but will test with opening the ports when I have time
+
+# Go to the WUI and then Settings > Forwarding and receiving > Receive data > choose Configure Receiving
+- here you will add the port that you are using ex. 9997
+
+##For the system that has a SplunkForwader installed on it
 ./splunk restart - this is on the system that has splunk monitoring
 
-List the setup forwarders
-./splunk list forward-server
+#List the setup forwarders
+- ./splunk list forward-server
 
-Now tell the forwarder what to send for monitoring
-./splunk add monitor /var/log/messages
+ENow tell the forwarder what to send for monitoring
+- ./splunk add monitor /var/log/messages
 
-Now restart splunk
-./splunk restart
-
-**I turned off the firewall, but will test with opening the ports when I have time
+ENow restart splunk
+- ./splunk restart
 
